@@ -1,4 +1,4 @@
-var db = require('../../db/db.reminder');
+var db = require('../../db/db.sent');
 var client = require('./client');
 var twilio = require('twilio');
 

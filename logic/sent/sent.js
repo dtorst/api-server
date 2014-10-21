@@ -1,18 +1,19 @@
-var db = require('../../db/db.reminder');
+var db = require('../../db/db.sent');
 // var shdlr = require('../scheduler/schedule');
 
-var reminder = {
+var sent = {
 
-  getAll: function(reminder) {
-    return db.getAll(reminder.userId);
+  getAll: function(sent) {
+    return db.getAll(sent.userId);
   },
 
-  getOne: function(reminder) {
-    return db.getOne(reminder.reminderId);
+  getOne: function(sent) {
+    return db.getOne(sent.reminderId);
   },
-  create: function(reminder) {
-    reminder.isCompleted = false;
-    var savedReminder = db.create(reminder);
+  
+  create: function(sent) {
+// KFN:    reminder.isCompleted = false;
+    var sentMessage = db.create(sent);
     // Schedule SMS/Call
     // KILLING FOR NOW
 /*    if (savedReminder) {
@@ -23,23 +24,24 @@ var reminder = {
         savedReminder.smsJob = shdlr.scheduleSMS(savedReminder);
       }
     } */
-    return savedReminder;
+    return sentMessage;
   },
-// KFN
+
+
 /*  cancel: function(reminder) {
     return shdlr.cancelJob(reminder.reminderId);
   }, */
 
-  delete: function(reminder) {
+  delete: function(sent) {
     // cancel jobs
 // KFN:    shdlr.cancelJob(reminder.reminderId);
 
     // remove the saved schedules
-    require('../../db/db.schedule').deleteJob(reminder.reminderId);
+// KFN:    require('../../db/db.schedule').deleteJob(reminder.reminderId);
 
     // delete the reminder
-    return db.delete(reminder.reminderId);
+    return db.delete(sent.reminderId);
   }
 };
 
-module.exports = reminder;
+module.exports = sent;

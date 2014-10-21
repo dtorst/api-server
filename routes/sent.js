@@ -1,11 +1,11 @@
 var msg = require('../messages/messages.js');
 
-var reminder = {
+var sent = {
 
   getAll: function(req, res) {
-    var reminder = req.params;
+    var sent = req.params;
 
-    if (!reminder.userId) {
+    if (!sent.userId) {
       // Invalid Data
       res.status(400);
       res.json({
@@ -15,12 +15,12 @@ var reminder = {
 
     } else {
       try {
-        var reminder = require('../logic/reminder/reminder').getAll(reminder);
+        var sent = require('../logic/sent/sent').getAll(sent);
         res.status(200);
         res.json({
           "status": 200,
           "message": msg.gbl_success,
-          "reminders": reminder
+          "sentMessages": sent
         });
       } catch (e) {
         res.status(500);
@@ -31,6 +31,8 @@ var reminder = {
       }
     }
   },
+
+
   getOne: function(req, res) {
     var rem = req.params;
     if (!rem.userId || !rem.reminderId) {
@@ -42,12 +44,12 @@ var reminder = {
       });
     } else {
       try {
-        var reminder = require('../logic/reminder/reminder').getOne(rem);
+        var sent = require('../logic/sent/sent').getOne(rem);
         res.status(200);
         res.json({
           "status": 200,
           "message": msg.gbl_success,
-          "reminder": reminder
+          "sentMessage": sent
         });
       } catch (e) {
         res.status(500);
@@ -59,13 +61,15 @@ var reminder = {
 
     }
   },
+
+
   create: function(req, res) {
-    var reminder = req.body;
-    reminder.userId = req.params.userId;
+    var sent = req.body;
+    sent.userId = req.params.userId;
 
-    console.log(reminder);
+    console.log(sent);
 
-    if (!reminder.remindThis) {
+    if (!sent.sentMessage | !sent.plate | !sent.state) {
       // Invalid Data
       res.status(400);
       res.json({
@@ -89,16 +93,16 @@ var reminder = {
 */
 
       // Check user before processing the data
-      var user = require('../db/db.auth.js').findById(reminder.userId);
+      var user = require('../db/db.auth.js').findById(sent.userId);
       delete user.password;
       if (user) {
-        reminder.user = user;
-        var savedReminder = require('../logic/reminder/reminder').create(reminder);
+        sent.user = user;
+        var sentMessage = require('../logic/sent/sent').create(sent);
         res.status(200);
         res.json({
           "status": 200,
           "message": msg.remider_newReminderSuccess,
-          "reminder": savedReminder
+          "sentMessage": sentMessage
         });
       } else {
         res.status(403);
@@ -109,6 +113,8 @@ var reminder = {
       }
     }
   },
+
+
   delete: function(req, res) {
     var rem = req.params;
     if (!rem.userId || !rem.reminderId) {
@@ -120,12 +126,12 @@ var reminder = {
       });
     } else {
       try {
-        var reminder = require('../logic/reminder/reminder').delete(rem);
+        var sent = require('../logic/sent/sent').delete(rem);
         res.status(200);
         res.json({
           "status": 200,
           "message": msg.gbl_success,
-          "delete": reminder
+          "delete": sent
         });
       } catch (e) {
         res.status(500);
@@ -137,6 +143,8 @@ var reminder = {
 
     }
   },
+
+  /*
   cancel: function(req, res) {
     var reminder = req.params;
     if (!reminder.userId || !reminder.reminderId) {
@@ -148,7 +156,7 @@ var reminder = {
       });
     } else {
       try {
-        var status = require('../logic/reminder/reminder').cancel(reminder);
+        var status = require('../logic/sent/sent').cancel(reminder);
         res.status(200);
         res.json({
           "status": 200,
@@ -163,7 +171,7 @@ var reminder = {
         });
       }
     }
-  }
+  } */
 }
 
-module.exports = reminder;
+module.exports = sent;

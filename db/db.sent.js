@@ -1,29 +1,29 @@
 var db = require('diskdb');
-db = db.connect('database', ['reminders']);
+db = db.connect('database', ['sent']);
 
 module.exports = {
   getAll: function(usrId) {
-    return db.reminders.find({
+    return db.sent.find({
       "userId": usrId
     });
   },
   getOne: function(remId) {
-    return db.reminders.findOne({
+    return db.sent.findOne({
       "_id": remId
     });
   },
-  create: function(reminder) {
-    return db.reminders.save(reminder);
+  create: function(sentMsg) {
+    return db.sent.save(sentMsg);
   },
   updateStatus: function(remid) {
-    return db.reminders.update({
+    return db.sent.update({
       "_id": remid
     }, {
       "isCompleted": true
     });
   },
   delete: function(remId) {
-    return db.reminders.remove({
+    return db.sent.remove({
       "_id": remId
     });
   }
