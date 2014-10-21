@@ -65,7 +65,7 @@ var reminder = {
 
     console.log(reminder);
 
-    if (!reminder.remindThis || !reminder.shdlCall || !reminder.shdlSMS) {
+    if (!reminder.remindThis) {
       // Invalid Data
       res.status(400);
       res.json({
@@ -75,6 +75,7 @@ var reminder = {
 
     } else {
 
+/* KILLING FOR NOW
       var _v = require('../util/validate');
 
       if (!_v.validateSchdl(reminder.shdlCall) || !_v.validateSchdl(reminder.shdlSMS)) {
@@ -85,6 +86,7 @@ var reminder = {
         });
         return;
       }
+*/
 
       // Check user before processing the data
       var user = require('../db/db.auth.js').findById(reminder.userId);

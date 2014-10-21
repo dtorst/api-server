@@ -3,16 +3,16 @@ db = db.connect('database', ['users']);
 
 module.exports = {
   register: function(user) {
-    var hasDuplicate = this.findUser(user.username);
+    var hasDuplicate = this.findUser(user.email);
     if (hasDuplicate) {
       return -1; // duplicate
     } else {
       return db.users.save(user);
     }
   },
-  findUser: function(username) {
+  findUser: function(email) {
     return db.users.findOne({
-      "username": username
+      "email": email
     });
   },
   findById: function(id) {

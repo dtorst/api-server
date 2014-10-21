@@ -4,7 +4,7 @@ var auth = {
   register: function(req, res) {
     var user = req.body;
 
-    if (!user.username || !user.password || !user.name || !user.phone) {
+    if (!user.email || !user.password || !user.plate || !user.state || !user.phone) {
       // Invalid Data
       res.status(400);
       res.json({
@@ -32,7 +32,7 @@ var auth = {
   },
   login: function(req, res) {
     var user = req.body;
-    if (!user.username || !user.password) {
+    if (!user.email || !user.password) {
       // Invalid Data
       res.status(400);
       res.json({

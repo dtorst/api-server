@@ -3,7 +3,7 @@ var router = express.Router();
 
 var auth = require('./auth');
 var reminder = require('./reminder');
-var twilio = require('./twilio');
+//KILLING FOR NOW: var twilio = require('./twilio');
 
 // AUTH routes
 router.post('/api/v1/auth/register', auth.register);
@@ -18,6 +18,7 @@ router.put('/api/v1/reminder/:userId/:reminderId/cancel', reminder.cancel); // w
 router.delete('/api/v1/reminder/:userId/:reminderId', reminder.delete); // might deprecate as well
 
 // TWILIO Call route - TWIML Response
-router.post('/call/twiml/:userId/:reminderId', twilio.getTwiml); // eventually will need to figure out how to fire this without a scheduled time, i.e. as soon as it's sent
+// KILLING FOR NOW
+// router.post('/call/twiml/:userId/:reminderId', twilio.getTwiml); // eventually will need to figure out how to fire this without a scheduled time, i.e. as soon as it's sent
 
 module.exports = router;

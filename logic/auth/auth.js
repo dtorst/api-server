@@ -13,7 +13,7 @@ var auth = {
   },
 
   login: function(user) {
-    var dbUser = db.findUser(user.username);
+    var dbUser = db.findUser(user.email);
     if (dbUser) {
       if (crypt.decryptPwd(user.password, dbUser.password)) {
         delete dbUser.password; // Remove the password from response
