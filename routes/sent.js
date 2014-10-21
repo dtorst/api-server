@@ -15,12 +15,12 @@ var sent = {
 
     } else {
       try {
-        var sent = require('../logic/sent/sent').getAll(sent);
+        var sentResults = require('../logic/sent/sent').getAll(sent);
         res.status(200);
         res.json({
           "status": 200,
           "message": msg.gbl_success,
-          "sentMessages": sent
+          "sentMessages": sentResults
         });
       } catch (e) {
         res.status(500);

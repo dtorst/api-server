@@ -1,5 +1,5 @@
 var schDB = require('../../db/db.schedule');
-var remDB = require('../../db/db.reminder');
+var remDB = require('../../db/db.sent');
 var tSMS = require('../twilio/triggerSMS');
 var tCall = require('../twilio/triggerCall');
 
