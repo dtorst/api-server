@@ -4,7 +4,8 @@ db = db.connect('database', ['sent']);
 module.exports = {
   getAll: function(usrId) {
     return db.sent.find({
-      "userId": usrId
+      "userId": usrId,
+      "senderDeleted": false
     });
   },
   getOne: function(remId) {
@@ -19,7 +20,7 @@ module.exports = {
     return db.sent.update({
       "_id": remid
     }, {
-      "isCompleted": true
+      "senderDeleted": true
     });
   },
   delete: function(remId) {

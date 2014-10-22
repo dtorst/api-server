@@ -12,7 +12,8 @@ var sent = {
   },
   
   create: function(sent) {
-// KFN:    reminder.isCompleted = false;
+    sent.senderDeleted = false;
+    sent.readerDeleted = false;
     var sentMessage = db.create(sent);
     // Schedule SMS/Call
     // KILLING FOR NOW
@@ -40,7 +41,7 @@ var sent = {
 // KFN:    require('../../db/db.schedule').deleteJob(reminder.reminderId);
 
     // delete the reminder
-    return db.delete(sent.reminderId);
+    return db.updateStatus(sent.reminderId);
   }
 };
 
