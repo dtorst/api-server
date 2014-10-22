@@ -5,7 +5,7 @@ var received = {
   getAll: function(req, res) {
     var received = req.params;
 
-    if (!received.state || !received.plate) {
+    if (!received.plate) {
       // Invalid Data
       res.status(400);
       res.json({
@@ -35,7 +35,7 @@ var received = {
 
   getOne: function(req, res) {
     var rem = req.params;
-    if (!rem.state || !rem.plate || !rem.reminderId) {
+    if (!rem.plate || !rem.reminderId) {
       // Invalid Data
       res.status(400);
       res.json({

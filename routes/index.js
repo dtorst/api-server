@@ -20,7 +20,7 @@ router.delete('/api/v1/sent/:userId/:reminderId', sent.delete); // might depreca
 
 
 // RECIEVED routes
-router.get('/api/v1/received/:state/:plate', received.getAll);
+router.get('/api/v1/received/:plate', received.getAll);
 router.get('/api/v1/received/:state/:plate/:reminderId', received.getOne);
 
 // TWILIO Call route - TWIML Response

@@ -69,7 +69,7 @@ var sent = {
 
     console.log(sent);
 
-    if (!sent.sentMessage | !sent.plate | !sent.state) {
+    if (!sent.sentMessage | !sent.plate) {
       // Invalid Data
       res.status(400);
       res.json({
@@ -96,7 +96,7 @@ var sent = {
       var user = require('../db/db.auth.js').findById(sent.userId);
       delete user.password;
       if (user) {
-        sent.user = user;
+//        sent.user = user;
         var sentMessage = require('../logic/sent/sent').create(sent);
         res.status(200);
         res.json({
