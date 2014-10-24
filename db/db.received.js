@@ -1,29 +1,29 @@
 var db = require('diskdb');
-db = db.connect('database', ['sent']);
+db = db.connect('database', ['received']);
 
 module.exports = {
   getAll: function(plate) {
-    return db.sent.find({
+    return db.received.find({
       "plate": plate
     });
   },
   getOne: function(remId) {
-    return db.sent.findOne({
+    return db.received.findOne({
       "_id": remId
     });
   },
   create: function(sentMsg) {
-    return db.sent.save(sentMsg);
+    return db.received.save(sentMsg);
   },
   updateStatus: function(remid) {
-    return db.sent.update({
+    return db.received.update({
       "_id": remid
     }, {
       "isCompleted": true
     });
   },
   delete: function(remId) {
-    return db.sent.remove({
+    return db.received.remove({
       "_id": remId
     });
   }

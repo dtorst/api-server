@@ -25,6 +25,14 @@ var auth = {
       return -2;
     }
 
+  },
+
+  account: function(user) {
+    return db.findById(user.userId);
+  },
+
+  plate: function(user) {
+    return db.findByPlate(user.plate);
   }
 
 };

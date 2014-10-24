@@ -19,5 +19,10 @@ module.exports = {
     return db.users.findOne({
       "_id": id
     });
+  },
+  findByPlate: function(plate) {
+    return db.users.findOne({
+      "plate": plate
+    });
   }
 };

@@ -11,6 +11,6 @@ module.exports = {
   remider_newReminderSuccess: "A new reminder has been successfully saved and scheduled",
   reminder_ShdlError: "The shdlCall or and shdlSMS should be a timestamp (like : 1411820580000) and should be in the future",
 
-  gbl_oops: "Oops something went wrong",
+  gbl_oops: "Oops, something went wrong",
   gbl_success: "success"
 };

@@ -56,6 +56,37 @@ var auth = {
         });
       }
     }
+  },
+
+  account: function(req, res) {
+    var user = req.params;
+
+    if (!user.userId) {
+      // Invalid Data
+      res.status(400);
+      res.json({
+        "status": 400,
+        "message": msg.reminder_userIDMissing
+      });
+
+    } else {
+      try {
+        var accountResults = require('../logic/auth/auth').account(user);
+        res.status(200);
+        console.log(accountResults);
+        res.json({
+          "status": 200,
+          "message": msg.gbl_success,
+          "account": accountResults
+        });
+      } catch (e) {
+        res.status(500);
+        res.json({
+          "status": 500,
+          "message": msg.gbl_oops
+        });
+      }
+    }
   }
 }
 

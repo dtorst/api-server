@@ -4,7 +4,8 @@ db = db.connect('database', ['sent']);
 module.exports = {
   getAll: function(usrId) {
     return db.sent.find({
-      "userId": usrId,
+      "userId": usrId
+    }, {
       "senderDeleted": false
     });
   },

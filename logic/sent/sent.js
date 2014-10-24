@@ -1,4 +1,7 @@
 var db = require('../../db/db.sent');
+var recd = require('../../db/db.received');
+var registeredUsers = require('../../db/db.auth');
+var tSMS = require('../twilio/triggerSMS');
 // var shdlr = require('../scheduler/schedule');
 
 var sent = {
@@ -12,11 +15,22 @@ var sent = {
   },
   
   create: function(sent) {
-    sent.senderDeleted = false;
-    sent.readerDeleted = false;
+
     var sentMessage = db.create(sent);
-    // Schedule SMS/Call
-    // KILLING FOR NOW
+
+    var recipient = sentMessage;
+
+    if (sentMessage) {
+      if (!registeredUsers.findByPlate(sentMessage.plate)) {
+
+        recipient.foundUser = false;
+        return recd.create(sent);
+      } else {
+        recipient.foundUser = registeredUsers.findByPlate(sentMessage.plate);
+        tSMS.triggerSMS(recipient);
+        return recd.create(sent);
+      }
+    }
 /*    if (savedReminder) {
       if (String(savedReminder.shdlCall).toLowerCase() != 'false') {
         savedReminder.callJob = shdlr.scheduleCall(savedReminder);
