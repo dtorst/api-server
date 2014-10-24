@@ -6,7 +6,7 @@ var auth = {
   register: function(user) {
     // create a password hash
     user.password = crypt.encryptPwd(user.password);
-
+    user.score = '0';
     // save the credentials in the database
     return db.register(user);
 

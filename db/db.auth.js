@@ -24,5 +24,12 @@ module.exports = {
     return db.users.findOne({
       "plate": plate
     });
+  },
+  updateScore: function(remid, newscore) {
+    return db.users.update({
+      "_id": remid
+    }, {
+      "score": newscore
+    });
   }
 };

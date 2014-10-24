@@ -79,24 +79,12 @@ var sent = {
 
     } else {
 
-/* KILLING FOR NOW
-      var _v = require('../util/validate');
-
-      if (!_v.validateSchdl(reminder.shdlCall) || !_v.validateSchdl(reminder.shdlSMS)) {
-        res.status(400);
-        res.json({
-          "status": 400,
-          "message": msg.reminder_ShdlError
-        });
-        return;
-      }
-*/
-
       // Check user before processing the data
       var user = require('../db/db.auth.js').findById(sent.userId);
       delete user.password;
       if (user) {
-//        sent.user = user;
+        var newScore = user.score++;
+        var updateScore = require('../db/db.auth.js').updateScore(sent.userId, newScore);
         var sentMessage = require('../logic/sent/sent').create(sent);
         res.status(200);
         res.json({
@@ -142,36 +130,7 @@ var sent = {
       }
 
     }
-  },
-
-  /*
-  cancel: function(req, res) {
-    var reminder = req.params;
-    if (!reminder.userId || !reminder.reminderId) {
-      // Invalid Data
-      res.status(400);
-      res.json({
-        "status": 400,
-        "message": msg.reminder_inputError
-      });
-    } else {
-      try {
-        var status = require('../logic/sent/sent').cancel(reminder);
-        res.status(200);
-        res.json({
-          "status": 200,
-          "message": msg.gbl_success,
-          "resp": status
-        });
-      } catch (e) {
-        res.status(500);
-        res.json({
-          "status": 500,
-          "message": msg.gbl_oops
-        });
-      }
-    }
-  } */
+  }
 }
 
 module.exports = sent;

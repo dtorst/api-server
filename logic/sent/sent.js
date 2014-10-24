@@ -2,7 +2,6 @@ var db = require('../../db/db.sent');
 var recd = require('../../db/db.received');
 var registeredUsers = require('../../db/db.auth');
 var tSMS = require('../twilio/triggerSMS');
-// var shdlr = require('../scheduler/schedule');
 
 var sent = {
 
@@ -31,30 +30,10 @@ var sent = {
         return recd.create(sent);
       }
     }
-/*    if (savedReminder) {
-      if (String(savedReminder.shdlCall).toLowerCase() != 'false') {
-        savedReminder.callJob = shdlr.scheduleCall(savedReminder);
-      }
-      if (String(savedReminder.shdlSMS).toLowerCase() != 'false') {
-        savedReminder.smsJob = shdlr.scheduleSMS(savedReminder);
-      }
-    } */
     return sentMessage;
   },
 
-
-/*  cancel: function(reminder) {
-    return shdlr.cancelJob(reminder.reminderId);
-  }, */
-
   delete: function(sent) {
-    // cancel jobs
-// KFN:    shdlr.cancelJob(reminder.reminderId);
-
-    // remove the saved schedules
-// KFN:    require('../../db/db.schedule').deleteJob(reminder.reminderId);
-
-    // delete the reminder
     return db.updateStatus(sent.reminderId);
   }
 };
